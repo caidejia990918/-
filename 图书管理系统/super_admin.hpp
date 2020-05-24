@@ -36,6 +36,9 @@ void admin_regis(int a);
 void init_super_admin();
 void Sup_admin_log();
 void CheckOutAllAdmin(int a);
+void check_admin_byname(int x);
+void alter_database();
+void admin_delete(int x);
 
 void Sup_admin_login_windows(int a)
 {
@@ -56,12 +59,18 @@ void Sup_admin_login_windows(int a)
     }
     else if(choice== 'B')
     {
-        
+        check_admin_byname(a);
     }
     else if(choice == 'C')
     {
         admin_regis(a);
     }
+    else if(choice=='D')
+    {
+        admin_delete(a);
+    }
+    else
+        return ;
 }
 
 void super_admin_windows()
@@ -201,5 +210,163 @@ void admin_regis(int x)
     OpenFile<<a.name<<" "<<a.account<<" "<<a.password<<" "<<a.email<<endl;
     OpenFile.close();
     cout<<"输入R返回上级菜单 ";
+    char temp;
+    cin>>temp;
+    getchar();
+    if(temp=='R')
     Sup_admin_login_windows(x);
+}
+
+void alter_adminInfo(int i,int x)
+ {
+     cout<<"*************************************************"<<endl;
+     cout<<"***********    输入A修改管理员密码       ***********"<<endl;
+     cout<<"***********   输入B修改管理员绑定邮箱    ***********"<<endl;
+     cout<<"***********        输入0退出          ***********"<<endl;
+     cout<<"*************************************************"<<endl;
+     char choice ;
+     cin>>choice;
+     getchar();
+     if(choice == 'A')
+     {
+         cout<<"您将修改管理员"<<admin[i].name<<"的密码,输入Y确认,输入其他键返回上级菜单"<<endl;
+         char temp ;
+         cin>>temp;
+         getchar();
+         if(temp=='Y')
+         {
+             cout<<"请输入新的管理员绑定邮箱,并重邮箱中确认此操作"<<endl;
+             char email [20];
+             cin>>email;
+             getchar();
+             if(strcmp(email, admin[i].email)==0)
+             {
+                 cout<<"请输入管理员新密码"<<endl;
+                 char passworld[20];
+                 cin>>passworld;
+                 getchar();
+                 memset(admin[i].password, 0, sizeof(admin[i].password));
+                 strcpy(admin[i].password, passworld);
+                 cout<<"修改管理员密码成功"<<endl;
+                 alter_database();
+                 Sup_admin_login_windows(x);
+             }
+             else
+             {
+                 cout<<"输入绑定邮箱错误错误!"<<endl;
+                 alter_adminInfo(i,x);
+             }
+             
+         }
+         
+     }
+    else if(choice =='B')
+    {
+        cout<<"您将修改管理员"<<admin[i].name<<"的邮箱,输入Y确认,输入其他键返回上级菜单"<<endl;
+        cout<<"请输入要修改的新邮箱，并在原邮箱中确认更改"<<endl;
+        char email[20];
+        cin>>email;
+        getchar();
+        memset(admin[i].email, 0, sizeof(admin[i].email));
+        strcpy(admin[i].email, email);
+        alter_database();
+        Sup_admin_login_windows(x);
+    }
+     else
+     {
+         Sup_admin_login_windows(x);
+     }
+         
+     
+}
+void check_admin_byname(int x)
+{
+    cout<<"请输入管理员姓名"<<endl;
+    char name[20];
+    cin>>name;
+    getchar();
+    int i;
+    for(i =0;i<admin.size();i++)
+    {
+        if(strcmp(admin[i].name, name)==0)
+        {
+            cout<<"姓名:"<<admin[i].name<<" 账号:"<<admin[i].account<<" 密码:"<<admin[i].password<<" 绑定邮箱:"<<admin[i].email<<endl;
+            break;
+        }
+            
+    }
+    if(i == admin.size())
+    {
+        cout<<"输入错误，未找到该管理员"<<endl;
+        Sup_admin_login_windows(x);
+    }
+    else
+    {
+        cout<<"输入C修改管理员信息,R返回上级菜单"<<endl;
+        char choice;
+        cin>>choice;
+        getchar();
+        if(choice == 'C')
+            alter_adminInfo(i,x);
+        else
+            Sup_admin_login_windows(x);
+        
+    }
+    
+    
+}
+
+void admin_delete(int x)
+{
+    cout<<"请输入将要删除的管理员姓名"<<endl;
+    char name [20];
+    cin>>name;
+    getchar();
+    int i;
+    for(i =0;i<admin.size();i++)
+    {
+        if(strcmp(admin[i].name, name)==0)
+        {
+            cout<<"姓名:"<<admin[i].name<<" 账号:"<<admin[i].account<<" 密码:"<<admin[i].password<<" 绑定邮箱:"<<admin[i].email<<endl;
+            break;
+        }
+            
+    }
+    if(i == admin.size())
+    {
+        cout<<"输入错误，未找到该管理员"<<endl;
+        Sup_admin_login_windows(x);
+    }
+    else
+    {
+        cout<<"是否删除该管理员，输入Y确认删除"<<endl;
+        char temp;
+        cin>>temp;
+        getchar();
+        if(temp=='Y')
+        {
+            cout<<"删除管理员"<<admin[i].name<<"成功"<<endl;
+            admin.erase(admin.begin()+i);
+            alter_database();
+            
+        }
+    }
+}
+
+void alter_database()
+{
+    ofstream OpenFile;
+    OpenFile.open("admin.txt",ios::trunc);
+    if(OpenFile.fail())
+    {
+        cout<<"打开文件错误";
+        exit(0);
+    }
+    OpenFile<<"";
+    OpenFile.close();
+    OpenFile.open("admin.txt",ios::app);
+    for(Administrator a : admin)
+         OpenFile<<a.name<<" "<<a.account<<" "<<a.password<<" "<<a.email<<endl;
+    OpenFile.close();
+    
 }
