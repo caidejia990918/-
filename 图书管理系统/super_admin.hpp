@@ -11,6 +11,7 @@
 
 #include<iostream>
 #include<vector>
+
 using namespace std;
 
 #endif /* super_admin_hpp */
@@ -95,18 +96,15 @@ void Sup_admin_log()
     cout<<"请输入超级管理员账号 "<<endl;
     char account[20];
     cin>>account;
-    getchar();
     if(strcmp(account, Sup_admin[0].account)==0)
     {
         cout<<"请输入登录密码"<<endl;
         char password[20];
         cin>>password;
-        getchar();
         while (strcmp(password, Sup_admin[0].password)!=0) {
             cout<<"输入密码错误，请重新输入"<<endl;
             memset(password, 0, sizeof(password));
             cin>>password;
-            getchar();
         }
         Sup_admin_login_windows(0);
     }
@@ -115,12 +113,12 @@ void Sup_admin_log()
         cout<<"请输入登录密码"<<endl;
         char password[20];
         cin>>password;
-        getchar();
         while (strcmp(password, Sup_admin[1].password)!=0) {
-            cout<<"输入密码错误，请重新输入"<<endl;
+            cout<<"输入密码错误，请重新输入!(输入R退出)"<<endl;
             memset(password, 0, sizeof(password));
             cin>>password;
-            getchar();
+            if(password[0]=='R')
+                super_admin_windows();
         }
         Sup_admin_login_windows(1);
     }
@@ -145,14 +143,12 @@ void check_same_account(Administrator & x)
 {
     char temp [20];
     cin>>temp;
-    getchar();
     for(Administrator a:admin)
         if(strcmp(a.account, temp)==0)
         {
             cout<<"输入账号重复，请重新输入"<<endl;
             memset(temp, 0, sizeof(temp));
             cin>>temp;
-            getchar();
         }
     strcpy(x.account, temp);
 }
@@ -164,7 +160,6 @@ void CheckOutAllAdmin(int a)
     cout<<"输入R返回上级菜单 ";
     char temp;
     cin>>temp;
-    getchar();
     if(temp=='R')
         Sup_admin_login_windows(a);
 }
@@ -182,29 +177,24 @@ void admin_regis(int x)
     }
     cout<<"请输入管理员姓名"<<endl;
     cin>>a.name;
-    getchar();
     cout<<"请输入账号"<<endl;
     check_same_account(a);
     cout<<"请输入密码"<<endl;
     char pa1[30],pa2[30];
     cin>>pa1;
-    getchar();
     cout<<"请再次输入密码"<<endl;
     cin>>pa2;
-    getchar();
     while(strcmp(pa1, pa2)!=0)
     {
         cout<<"两次输入密码不一致，请重新输入密码"<<endl;
         memset(pa1, 0, sizeof(pa1));
         memset(pa2,0,sizeof(pa2));
         cin>>pa1;
-        getchar();
         cout<<"请再次输入密码"<<endl;
         cin>>pa2;
-        getchar();
     }
     strcpy(a.password,pa1);
-    cout<<"请输入邮箱(找回密码是使用)"<<endl;
+    cout<<"请输入邮箱(找回密码时使用)"<<endl;
     cin>>a.email;
     cout<<"管理员 "<<a.name<<" 注册成功"<<endl;
     OpenFile<<a.name<<" "<<a.account<<" "<<a.password<<" "<<a.email<<endl;
@@ -212,7 +202,7 @@ void admin_regis(int x)
     cout<<"输入R返回上级菜单 ";
     char temp;
     cin>>temp;
-    getchar();
+    admin.push_back(a);
     if(temp=='R')
     Sup_admin_login_windows(x);
 }
@@ -226,7 +216,6 @@ void alter_adminInfo(int i,int x)
      cout<<"*************************************************"<<endl;
      char choice ;
      cin>>choice;
-     getchar();
      if(choice == 'A')
      {
          cout<<"您将修改管理员"<<admin[i].name<<"的密码,输入Y确认,输入其他键返回上级菜单"<<endl;
@@ -244,7 +233,6 @@ void alter_adminInfo(int i,int x)
                  cout<<"请输入管理员新密码"<<endl;
                  char passworld[20];
                  cin>>passworld;
-                 getchar();
                  memset(admin[i].password, 0, sizeof(admin[i].password));
                  strcpy(admin[i].password, passworld);
                  cout<<"修改管理员密码成功"<<endl;
@@ -266,7 +254,6 @@ void alter_adminInfo(int i,int x)
         cout<<"请输入要修改的新邮箱，并在原邮箱中确认更改"<<endl;
         char email[20];
         cin>>email;
-        getchar();
         memset(admin[i].email, 0, sizeof(admin[i].email));
         strcpy(admin[i].email, email);
         alter_database();
@@ -284,7 +271,6 @@ void check_admin_byname(int x)
     cout<<"请输入管理员姓名"<<endl;
     char name[20];
     cin>>name;
-    getchar();
     int i;
     for(i =0;i<admin.size();i++)
     {
@@ -305,7 +291,6 @@ void check_admin_byname(int x)
         cout<<"输入C修改管理员信息,R返回上级菜单"<<endl;
         char choice;
         cin>>choice;
-        getchar();
         if(choice == 'C')
             alter_adminInfo(i,x);
         else
@@ -321,7 +306,6 @@ void admin_delete(int x)
     cout<<"请输入将要删除的管理员姓名"<<endl;
     char name [20];
     cin>>name;
-    getchar();
     int i;
     for(i =0;i<admin.size();i++)
     {
@@ -342,13 +326,12 @@ void admin_delete(int x)
         cout<<"是否删除该管理员，输入Y确认删除"<<endl;
         char temp;
         cin>>temp;
-        getchar();
         if(temp=='Y')
         {
             cout<<"删除管理员"<<admin[i].name<<"成功"<<endl;
             admin.erase(admin.begin()+i);
             alter_database();
-            
+            Sup_admin_login_windows(x);
         }
     }
 }

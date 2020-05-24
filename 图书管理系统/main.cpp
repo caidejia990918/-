@@ -11,19 +11,19 @@
 #include<fstream>
 #include<vector>
 #include"super_admin.hpp"
-
+#include"books.hpp"
+#include"admin.hpp"
 using namespace std;
 
 
-void admin_windows();
-void admin_log();
+
 
 
 void windows()
 {
     char choice='1';
     while (choice!='0') {
-        cout<<"****************欢迎进入图书管理系统******************"<<endl;
+        cout<<"****************欢迎进入图书管理系统*******************"<<endl;
         cout<<"***********                           *************"<<endl;
         cout<<"***********                           *************"<<endl;
         cout<<"***********     输入Y进行管理员登陆      *************"<<endl;
@@ -43,30 +43,6 @@ void windows()
     
 }
 
-void admin_windows()
-{
-    cout<<"***************欢迎进入管理员登陆界面*****************"<<endl;
-    cout<<"***********                           ************"<<endl;
-    cout<<"******               输入Y登陆                 *****"<<endl;
-    cout<<"***********          输入R返回          ************"<<endl;
-    cout<<"***********                           ************"<<endl;
-    cout<<"***************************************************"<<endl;
-    cout<<"请输入：";
-    char choice;
-    cin>>choice;
-    if(choice == 'Y')
-    {
-        admin_log();
-        getchar();
-    }
-    else
-        return;
-}
-
-void admin_log()
-{
-    cout<<"hello";
-}
 
 void init_database()
 {

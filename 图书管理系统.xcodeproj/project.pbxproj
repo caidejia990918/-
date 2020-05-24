@@ -26,6 +26,9 @@
 		DE0578BA247769CE002FDA59 /* 图书管理系统 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "图书管理系统"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0578BD247769CE002FDA59 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DE71B376247A50EE005763BA /* super_admin.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = super_admin.hpp; sourceTree = "<group>"; };
+		DE71B379247A7E0E005763BA /* books.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = books.hpp; sourceTree = "<group>"; };
+		DE71B37C247AA44E005763BA /* admin.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = admin.hpp; sourceTree = "<group>"; };
+		DE71B37F247AB5EA005763BA /* reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = reader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +62,10 @@
 			isa = PBXGroup;
 			children = (
 				DE0578BD247769CE002FDA59 /* main.cpp */,
+				DE71B37C247AA44E005763BA /* admin.hpp */,
 				DE71B376247A50EE005763BA /* super_admin.hpp */,
+				DE71B379247A7E0E005763BA /* books.hpp */,
+				DE71B37F247AB5EA005763BA /* reader.hpp */,
 			);
 			path = "图书管理系统";
 			sourceTree = "<group>";
