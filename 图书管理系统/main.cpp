@@ -53,8 +53,14 @@ void init_database()
         sscanf(&s[0],"%s%s%s%s",a.name,a.account,a.password,a.email);
         admin.push_back(a);
     }
-    //    for(Administrator a : admin)
-    //     cout<<a.name<<" "<<a.account<<" "<<a.password<<" "<<a.email<<endl;
+    file.close();
+    ifstream bookfile("book.txt");
+    while (getline(bookfile,s)) {
+        book b;
+        sscanf(&s[0],"%d%s%s%d",&b.id,b.name,b.writer,&b.cur_amount);
+           books.push_back(b);
+       }
+    bookfile.close();
 }
 int main(int argc, const char * argv[]) {
     init_database();
