@@ -69,6 +69,13 @@ void book_insert()
         }
         
         Openfile.close();
+        cout<<"添加成功!输入Y继续添加，输入R返回上层菜单"<<endl;
+        char choice;
+        cin>>choice;
+        if(choice == 'Y')
+            book_insert();
+        else
+            check_book_windows();
     }
     else
         check_book_windows();

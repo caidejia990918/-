@@ -212,6 +212,11 @@ void search_book_byname_reader(char * name,char * writer,int x)
                 {
                     borrow_book_success(x, m);
                     cout<<"恭喜，借书成功!!"<<endl;
+                    cout<<"输入Y继续借书，输入R返回上层菜单: ";
+                    char choice ;
+                    cin>>choice;
+                    
+                        
                 }
                 
             }
