@@ -65,7 +65,7 @@ void book_insert()
                 cout<<"打开文件失败"<<endl;
                 exit(0);
             }
-            Openfile<<b.id<<" "<<b.name<<" "<<b.writer<<" "<<b.cur_amount<<endl;
+            Openfile<<b.id<<" "<<b.name<<" "<<b.writer<<" "<<b.cur_amount<<" "<<b.status<<endl;
         }
         
         Openfile.close();
@@ -115,6 +115,7 @@ void search_book_byname()
                    search_book_windows();
            }
 }
+ 
 void search_book_byId()
 {
     cout<<"请输入要查询的图书ID"<<endl;
@@ -200,7 +201,7 @@ void alter_database_book()
     OpenFile.close();
     OpenFile.open("book.txt",ios::app);
     for(book b :books)
-       OpenFile<<b.id<<" "<<b.name<<" "<<b.writer<<" "<<b.cur_amount<<endl;
+        OpenFile<<b.id<<" "<<b.name<<" "<<b.writer<<" "<<b.cur_amount<<" "<<b.status<<endl;
     OpenFile.close();
     
 }

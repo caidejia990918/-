@@ -58,7 +58,7 @@ void init_database()
     ifstream bookfile("book.txt");
     while (getline(bookfile,s)) {
         book b;
-        sscanf(&s[0],"%d%s%s%d",&b.id,b.name,b.writer,&b.cur_amount);
+        sscanf(&s[0],"%d%s%s%d%d",&b.id,b.name,b.writer,&b.cur_amount,&b.status);
            books.push_back(b);
        }
     bookfile.close();
