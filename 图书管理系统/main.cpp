@@ -12,6 +12,7 @@
 #include<vector>
 #include"super_admin.hpp"
 #include"books.hpp"
+#include"book_borrow_info.hpp"
 #include"reader.hpp"
 #include"admin.hpp"
 using namespace std;
@@ -24,12 +25,12 @@ void windows()
 {
     char choice='1';
     while (choice!='0') {
-        cout<<"****************欢迎进入图书管理系统*******************"<<endl;
-        cout<<"***********                           *************"<<endl;
-        cout<<"***********                           *************"<<endl;
-        cout<<"***********     输入Y进行管理员登陆       *************"<<endl;
-        cout<<"***********   输入S进行超级管理员登陆     *************"<<endl;
-        cout<<"***********       输入0退出系统         *************"<<endl;
+        cout<<"****************欢迎进入图书管理系统**********************"<<endl;
+        cout<<"***********                              *************"<<endl;
+        cout<<"***********                             *************"<<endl;
+        cout<<"***********      输入Y进行管理员登陆       *************"<<endl;
+        cout<<"***********    输入S进行超级管理员登陆     *************"<<endl;
+        cout<<"***********        输入0退出系统        *************"<<endl;
         cout<<"***********                           *************"<<endl;
         cout<<"***********                           *************"<<endl;
         cout<<"***************************************************"<<endl;
@@ -44,6 +45,13 @@ void windows()
     
 }
 
+void init_reader_borrowBook(borrow_book b)
+{
+    char account [20];
+    strcpy(account, b.theAccount_reader);
+    int m=get_reader(account);
+    readers[m].personal_lib.push_back(b);
+}
 
 void init_database()
 {
@@ -69,7 +77,18 @@ void init_database()
            readers.push_back(r);
        }
     readerfile.close();
+    ifstream borrowBookfile("BorrowBook.txt");
+    while (getline(borrowBookfile,s)) {
+        borrow_book bob;
+        sscanf(&s[0],"%s%d%s%s",bob.theAccount_reader,&bob.theID_book,bob.borrow_time,bob.the_day_need_return);
+           borr_books.push_back(bob);
+         init_reader_borrowBook(bob);
+       }
+    borrowBookfile.close();
 }
+
+
+
 int main(int argc, const char * argv[]) {
     init_database();
     init_super_admin();

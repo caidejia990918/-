@@ -29,6 +29,7 @@
 		DE71B379247A7E0E005763BA /* books.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = books.hpp; sourceTree = "<group>"; };
 		DE71B37C247AA44E005763BA /* admin.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = admin.hpp; sourceTree = "<group>"; };
 		DE71B37F247AB5EA005763BA /* reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = reader.hpp; sourceTree = "<group>"; };
+		DE87E4A9247BDD0200334E6E /* book_borrow_info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = book_borrow_info.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 				DE71B376247A50EE005763BA /* super_admin.hpp */,
 				DE71B379247A7E0E005763BA /* books.hpp */,
 				DE71B37F247AB5EA005763BA /* reader.hpp */,
+				DE87E4A9247BDD0200334E6E /* book_borrow_info.hpp */,
 			);
 			path = "图书管理系统";
 			sourceTree = "<group>";

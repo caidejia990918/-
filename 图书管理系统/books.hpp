@@ -205,7 +205,15 @@ void alter_database_book()
     OpenFile.close();
     
 }
-
+int get_book_id(int id)
+{
+    for(int i =0;i<books.size();i++)
+    {
+        if(books[i].id==id)
+            return i;
+    }
+    return -1;
+}
 void delete_book()
 {
     cout<<"按Y确认进行图书删除，按R返回上层菜单"<<endl;
@@ -270,6 +278,7 @@ void delete_book()
         
     }
 }
+
 void check_book_windows()
 {
     cout<<"**************欢迎进入图书管理界面*******************"<<endl;
