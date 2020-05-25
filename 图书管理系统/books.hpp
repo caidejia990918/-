@@ -14,7 +14,8 @@
 #endif /* books_hpp */
 void check_book_windows();
 void search_book_windows();
-
+void admin_loggin_windows(int i);
+int get_curadmin_id();
 struct book
 {
     int id;
@@ -288,6 +289,6 @@ void check_book_windows()
     else if(choice == 'C')
         delete_book();
     else
-        return;
+        admin_loggin_windows(get_curadmin_id());
     
 }

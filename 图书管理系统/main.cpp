@@ -12,6 +12,7 @@
 #include<vector>
 #include"super_admin.hpp"
 #include"books.hpp"
+#include"reader.hpp"
 #include"admin.hpp"
 using namespace std;
 
@@ -26,7 +27,7 @@ void windows()
         cout<<"****************欢迎进入图书管理系统*******************"<<endl;
         cout<<"***********                           *************"<<endl;
         cout<<"***********                           *************"<<endl;
-        cout<<"***********     输入Y进行管理员登陆      *************"<<endl;
+        cout<<"***********     输入Y进行管理员登陆       *************"<<endl;
         cout<<"***********   输入S进行超级管理员登陆     *************"<<endl;
         cout<<"***********       输入0退出系统         *************"<<endl;
         cout<<"***********                           *************"<<endl;
@@ -61,6 +62,13 @@ void init_database()
            books.push_back(b);
        }
     bookfile.close();
+    ifstream readerfile("reader.txt");
+    while (getline(readerfile,s)) {
+        reader r;
+        sscanf(&s[0],"%s%s%s%s%s",r.name,r.account,r.password,r.sex,r.login_date);
+           readers.push_back(r);
+       }
+    readerfile.close();
 }
 int main(int argc, const char * argv[]) {
     init_database();

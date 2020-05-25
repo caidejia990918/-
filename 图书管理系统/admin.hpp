@@ -16,6 +16,8 @@
 void admin_log();
 void admin_loggin_windows(int i);
 
+int cur_id;
+
 void admin_windows()
 {
     cout<<"***************欢迎进入管理员登陆界面*******************"<<endl;
@@ -38,7 +40,8 @@ void admin_windows()
 
 void admin_loggin_windows(int i)
 {
-    cout<<"****************欢迎您,管理员"<<admin[i].name<<"******************"<<endl;
+    cout<<"欢迎您,管理员"<<admin[i].name<<endl;
+    cout<<"*******************************************************"<<endl;
     cout<<"******               输入A以进行书库维护            ******"<<endl;
     cout<<"******               输入B以进行读者维护            ******"<<endl;
     cout<<"******                  输入0退出                 ******"<<endl;
@@ -49,7 +52,16 @@ void admin_loggin_windows(int i)
     getchar();
     if(choice == 'A')
         check_book_windows();
+    if(choice == 'B')
+        reader_window();
 }
+
+
+int get_curadmin_id()
+{
+    return cur_id;
+}
+
 void admin_log()
 {
     cout<<"***************欢迎进入管理员登陆界面*****************"<<endl;
@@ -80,6 +92,7 @@ void admin_log()
             if(password[0]=='R')
                 admin_windows();
         }
+        cur_id=i;
         admin_loggin_windows(i);
     }
 }

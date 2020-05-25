@@ -143,12 +143,13 @@ void check_same_account(Administrator & x)
 {
     char temp [20];
     cin>>temp;
-    for(Administrator a:admin)
-        if(strcmp(a.account, temp)==0)
+    for(int i =0;i<admin.size();i++)
+        if(strcmp(admin[i].account, temp)==0)
         {
             cout<<"输入账号重复，请重新输入"<<endl;
             memset(temp, 0, sizeof(temp));
             cin>>temp;
+            i=0;
         }
     strcpy(x.account, temp);
 }
@@ -318,7 +319,12 @@ void admin_delete(int x)
     }
     if(i == admin.size())
     {
-        cout<<"输入错误，未找到该管理员"<<endl;
+        cout<<"输入错误，未找到该管理员，输入Y继续操作，输入R返回上级菜单"<<endl;
+        char choice;
+        cin>>choice;
+        if(choice=='Y')
+            admin_delete(x);
+        else
         Sup_admin_login_windows(x);
     }
     else
