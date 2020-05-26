@@ -25,15 +25,15 @@ void windows()
 {
     char choice='1';
     while (choice!='0') {
-        cout<<"****************欢迎进入图书管理系统**********************"<<endl;
-        cout<<"***********                              *************"<<endl;
-        cout<<"***********                             *************"<<endl;
-        cout<<"***********      输入Y进行管理员登陆       *************"<<endl;
-        cout<<"***********    输入S进行超级管理员登陆     *************"<<endl;
-        cout<<"***********        输入0退出系统        *************"<<endl;
-        cout<<"***********                           *************"<<endl;
-        cout<<"***********                           *************"<<endl;
-        cout<<"***************************************************"<<endl;
+        cout<<"*******************欢迎进入图书管理系统******************"<<endl;
+        cout<<endl;
+        cout<<endl;
+        cout<<"                   输入Y进行管理员登陆                  "<<endl;
+        cout<<"                  输入S进行超级管理员登陆               "<<endl;
+        cout<<"                     输入0退出系统                     "<<endl;
+        cout<<endl;
+        cout<<endl;
+        cout<<"*****************************************************"<<endl;
         cout<<"请输入: ";
         cin>>choice;
         getchar();
@@ -67,23 +67,23 @@ void init_database()
     while (getline(bookfile,s)) {
         book b;
         sscanf(&s[0],"%d%s%s%d%d",&b.id,b.name,b.writer,&b.cur_amount,&b.status);
-           books.push_back(b);
-       }
+        books.push_back(b);
+    }
     bookfile.close();
     ifstream readerfile("reader.txt");
     while (getline(readerfile,s)) {
         reader r;
         sscanf(&s[0],"%s%s%s%s%s",r.name,r.account,r.password,r.sex,r.login_date);
-           readers.push_back(r);
-       }
+        readers.push_back(r);
+    }
     readerfile.close();
     ifstream borrowBookfile("BorrowBook.txt");
     while (getline(borrowBookfile,s)) {
         borrow_book bob;
         sscanf(&s[0],"%s%d%s%s",bob.theAccount_reader,&bob.theID_book,bob.borrow_time,bob.the_day_need_return);
-           borr_books.push_back(bob);
-         init_reader_borrowBook(bob);
-       }
+        borr_books.push_back(bob);
+        init_reader_borrowBook(bob);
+    }
     borrowBookfile.close();
 }
 

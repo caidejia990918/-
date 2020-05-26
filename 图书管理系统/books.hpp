@@ -42,7 +42,7 @@ void add_book_id(book & x)
 
 void book_insert()
 {
-    cout<<"输入Y进行图书添加，输入R返回上级菜单"<<endl;
+    cout<<"输入Y进行图书添加，输入R返回上级菜单 "<<endl;
     char choice;
     cin>>choice;
     if(choice == 'Y')
@@ -69,7 +69,7 @@ void book_insert()
         }
         
         Openfile.close();
-        cout<<"添加成功!输入Y继续添加，输入R返回上层菜单"<<endl;
+        cout<<"添加成功!输入Y继续添加，输入R返回上层菜单 "<<endl;
         char choice;
         cin>>choice;
         if(choice == 'Y')
@@ -103,7 +103,7 @@ void search_book_byname()
     }
     if (count==0)
            {
-               cout<<"未找到该图书，输入Y重新输入，输入R返回上级菜单"<<endl;
+               cout<<"未找到该图书，输入Y重新输入，输入R返回上级菜单 "<<endl;
                char choice;
                cin>>choice;
                if(choice=='Y')
@@ -113,7 +113,7 @@ void search_book_byname()
            }
            else
            {
-               cout<<"输入Y继续，输入R返回上级菜单";
+               cout<<"输入Y继续，输入R返回上级菜单 ";
                char choice;
                cin>>choice;
                if(choice=='Y')
@@ -146,7 +146,7 @@ void search_book_byId()
        }
        if (count==0)
               {
-                  cout<<"未找到该图书，输入Y重新输入，输入R返回上级菜单"<<endl;
+                  cout<<"未找到该图书，输入Y重新输入，输入R返回上级菜单 "<<endl;
                   char choice;
                   cin>>choice;
                   if(choice=='Y')
@@ -156,7 +156,7 @@ void search_book_byId()
               }
               else
               {
-                  cout<<"输入Y继续，输入R返回上级菜单";
+                  cout<<"输入Y继续，输入R返回上级菜单 ";
                   char choice;
                   cin>>choice;
                   if(choice=='Y')
@@ -179,11 +179,11 @@ void alter_book_amount(int i)
 void search_book_windows()
 {
     cout<<"**************************************************"<<endl;
-    cout<<"***********                          *************"<<endl;
-    cout<<"***********    输入A通过书名进行查询     *************"<<endl;
-    cout<<"***********   输入B通过图书编号进行查询   *************"<<endl;
-    cout<<"***********         输入R返回          *************"<<endl;
-    cout<<"***********                          *************"<<endl;
+    cout<<endl;
+    cout<<"                 输入A通过书名进行查询        "<<endl;
+    cout<<"               输入B通过图书编号进行查询       "<<endl;
+    cout<<"                     输入R返回              "<<endl;
+    cout<<endl;
     cout<<"**************************************************"<<endl;
     cout<<"请输入 ";
     char choice;
@@ -223,7 +223,7 @@ int get_book_id(int id)
 }
 void delete_book()
 {
-    cout<<"按Y确认进行图书删除，按R返回上层菜单"<<endl;
+    cout<<"按Y确认进行图书删除，按R返回上层菜单 "<<endl;
     char choice;
     cin>>choice;
     if(choice == 'Y')
@@ -250,7 +250,7 @@ void delete_book()
              }
         if (count==0)
         {
-            cout<<"未找到该图书，输入Y重新输入，输入R返回上级菜单"<<endl;
+            cout<<"未找到该图书，输入Y重新输入，输入R返回上级菜单 "<<endl;
             char choice;
             cin>>choice;
             if(choice=='Y')
@@ -271,7 +271,7 @@ void delete_book()
                       books.erase(books.begin()+i);
                       alter_database_book();
                       char temp1;
-                      cout<<"输入Y继续删除图书，R返回上级菜单"<<endl;
+                      cout<<"输入Y继续删除图书，R返回上级菜单 "<<endl;
                       cin>>temp1;
                       if(temp1=='Y')
                           delete_book();
@@ -286,16 +286,34 @@ void delete_book()
     }
 }
 
+void checkoutAllBooks()
+{
+    for(int i =0;i<books.size();i++)
+       {
+               if(i==0)
+                   cout<<"图书编号"<<"    "<<"图书名称"<<"        "<<"图书作者"<<"     "<<"是否可借"<<endl;
+               cout<<"  "<<books[i].id<<"    "<<books[i].name<<"   "<<books[i].writer<<"    ";
+               if(books[i].status==0)
+                   cout<<"Yes"<<endl;
+               else
+                   cout<<"No"<<endl;
+           }
+    char choice;
+    cout<<"输入任意见返回上级菜单:";
+    cin>>choice;
+    check_book_windows();
+}
 void check_book_windows()
 {
-    cout<<"**************欢迎进入图书管理界面*******************"<<endl;
-    cout<<"***********                         *************"<<endl;
-    cout<<"***********    输入A进行图书查询       *************"<<endl;
-    cout<<"***********    输入B进行图书添加       *************"<<endl;
-    cout<<"***********    输入C进行图书注销       *************"<<endl;
-    cout<<"***********       输入R返回           *************"<<endl;
-    cout<<"***********                         *************"<<endl;
-    cout<<"*************************************************"<<endl;
+    cout<<"****************欢迎进入图书管理界面*******************"<<endl;
+    cout<<endl;
+    cout<<"                输入A进行图书查询             "<<endl;
+    cout<<"                输入B进行图书添加              "<<endl;
+    cout<<"                输入C进行图书注销              "<<endl;
+    cout<<"               输入D查看所有馆藏图书             "<<endl;
+    cout<<"                   输入R返回                 "<<endl;
+    cout<<endl;
+    cout<<"***************************************************"<<endl;
     cout<<"请输入 ";
     char choice;
     cin>>choice;
@@ -305,6 +323,8 @@ void check_book_windows()
         search_book_windows();
     else if(choice == 'C')
         delete_book();
+    else if(choice == 'D')
+        checkoutAllBooks();
     else
         admin_loggin_windows(get_curadmin_id());
     

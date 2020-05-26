@@ -324,7 +324,7 @@ void alter_reader_info()
     }
     if(i == readers.size())
     {
-        cout<<"输入错误，未找到该读者，输入Y继续操作，输入R返回上级菜单"<<endl;
+        cout<<"输入错误，未找到该读者，输入Y继续操作，输入R返回上级菜单 "<<endl;
         char choice;
         cin>>choice;
         if(choice=='Y')
@@ -333,7 +333,7 @@ void alter_reader_info()
             reader_window();
     }
     else{
-        cout<<"您将修改读者"<<readers[i].name<<"的密码,输入Y确认,输入其他键返回上级菜单"<<endl;
+        cout<<"您将修改读者"<<readers[i].name<<"的密码,输入Y确认,输入其他键返回上级菜单 "<<endl;
         char temp ;
         cin>>temp;
         getchar();
@@ -430,7 +430,7 @@ void checkup_reader_borrow()
     }
     if(i == readers.size())
     {
-        cout<<"输入错误，未找到该读者，输入Y继续操作，输入R返回上级菜单"<<endl;
+        cout<<"输入错误，未找到该读者，输入Y继续操作，输入R返回上级菜单 "<<endl;
         char choice;
         cin>>choice;
         if(choice=='Y')
@@ -444,7 +444,7 @@ void checkup_reader_borrow()
         {
             cout<<"读者"<<readers[i].name<<"未借任何图书"<<endl;
             char choice;
-            cout<<"输入Y继续查询其他读者，输入R返回上级菜单";
+            cout<<"输入Y继续查询其他读者，输入R返回上级菜单 ";
             cin>>choice;
             if(choice=='Y')
                 checkup_reader_borrow();
@@ -462,7 +462,7 @@ void checkup_reader_borrow()
                 cout<<"    "<<book_id<<"   "<<books[get_book_id(book_id)].name<<" "<<books[get_book_id(book_id)].writer<<" "<<
                 readers[i].personal_lib[j].borrow_time<<" "<<readers[i].personal_lib[j].the_day_need_return<<endl;
             }
-            cout<<"输入Y进行还书，输入R返回上级菜单"<<endl;
+            cout<<"输入Y进行还书，输入R返回上级菜单 "<<endl;
             char choice;
             cin>>choice ;
             if(choice == 'Y')
@@ -480,15 +480,15 @@ void checkup_reader_borrow()
 void reader_window()
 {
     cout<<"******************欢迎进入读者管理系统********************"<<endl;
-    cout<<"********                                     *********"<<endl;
-    cout<<"********          输入A以录入新的读者           ********"<<endl;
-    cout<<"********          输入B以删除读者信息          ********"<<endl;
-    cout<<"********          输入C以修改读者密码         ********"<<endl;
-    cout<<"********         输入D进入读者借书系统        ********"<<endl;
-    cout<<"********      输入E查看读者所借书目信息(还书) ********"<<endl;
-    cout<<"********           输入R返回上级菜单       ********"<<endl;
-    cout<<"********                               ********"<<endl;
-    cout<<"***********************************************"<<endl;
+    cout<<endl;
+    cout<<"                  输入A以录入新的读者                 "<<endl;
+    cout<<"                  输入B以删除读者信息                 "<<endl;
+    cout<<"                  输入C以修改读者密码                 "<<endl;
+    cout<<"                  输入D进入读者借书系统                 "<<endl;
+    cout<<"              输入E查看读者所借书目信息(还书)           "<<endl;
+    cout<<"                    输入R返回上级菜单                  "<<endl;
+    cout<<endl;
+    cout<<"*****************************************************"<<endl;
     cout<<"请输入：";
     char choice ;
     cin>>choice;

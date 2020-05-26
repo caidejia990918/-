@@ -15,6 +15,8 @@
 using namespace std;
 
 #endif /* super_admin_hpp */
+
+void admin_loggin_windows(int i);
 struct Administrator
 {
     char name [20];
@@ -43,12 +45,16 @@ void admin_delete(int x);
 
 void Sup_admin_login_windows(int a)
 {
-    cout<<"*******************欢迎您"<<Sup_admin[a].name<<"***********************"<<endl;
-    cout<<"******              输入A以查看所有管理员             ******"<<endl;
-    cout<<"******           输入B以通过管理员姓名进行查找         ******"<<endl;
-    cout<<"******              输入C以进行新的管理员录入         ******"<<endl;
-    cout<<"******               输入D以删除管理员              ******"<<endl;
-    cout<<"******                  输入0退出                 ******"<<endl;
+    cout<<"欢迎您"<<Sup_admin[a].name<<endl;
+    cout<<"*******************************************************"<<endl;
+    cout<<endl;
+    cout<<"                  输入A以查看所有管理员             "<<endl;
+    cout<<"               输入B以通过管理员姓名进行查找         "<<endl;
+    cout<<"                 输入C以进行新的管理员录入        "<<endl;
+    cout<<"                    输入D以删除管理员              "<<endl;
+    cout<<"                 输入E进行书库及读者管理系统             "<<endl;
+    cout<<"                       输入0退出                 "<<endl;
+    cout<<endl;
     cout<<"*******************************************************"<<endl;
     cout<<"请输入：";
     char choice ;
@@ -70,6 +76,10 @@ void Sup_admin_login_windows(int a)
     {
         admin_delete(a);
     }
+    else if(choice == 'E')
+    {
+        admin_loggin_windows(-1);
+    }
     else
         return ;
 }
@@ -77,10 +87,10 @@ void Sup_admin_login_windows(int a)
 void super_admin_windows()
 {
     cout<<"***************欢迎进入超级管理员登陆界面*****************"<<endl;
-    cout<<"***********                               ***********"<<endl;
-    cout<<"******                输入Y登陆                 *******"<<endl;
-    cout<<"***********           输入R返回          **************"<<endl;
-    cout<<"***********                            ***************"<<endl;
+    cout<<endl;
+    cout<<"                     输入Y登陆                 "<<endl;
+    cout<<"                     输入R返回               "<<endl;
+    cout<<endl;
     cout<<"******************************************************"<<endl;
     cout<<"请输入: ";
     char choice;
@@ -211,15 +221,17 @@ void admin_regis(int x)
 void alter_adminInfo(int i,int x)
  {
      cout<<"*************************************************"<<endl;
-     cout<<"***********    输入A修改管理员密码       ***********"<<endl;
-     cout<<"***********   输入B修改管理员绑定邮箱    ***********"<<endl;
-     cout<<"***********        输入0退出          ***********"<<endl;
+     cout<<endl;
+     cout<<"                输入A修改管理员密码              "<<endl;
+     cout<<"              输入B修改管理员绑定邮箱            "<<endl;
+     cout<<"                   输入0退出                   "<<endl;
+     cout<<endl;
      cout<<"*************************************************"<<endl;
      char choice ;
      cin>>choice;
      if(choice == 'A')
      {
-         cout<<"您将修改管理员"<<admin[i].name<<"的密码,输入Y确认,输入其他键返回上级菜单"<<endl;
+         cout<<"您将修改管理员"<<admin[i].name<<"的密码,输入Y确认,输入其他键返回上级菜单 "<<endl;
          char temp ;
          cin>>temp;
          getchar();
@@ -251,7 +263,7 @@ void alter_adminInfo(int i,int x)
      }
     else if(choice =='B')
     {
-        cout<<"您将修改管理员"<<admin[i].name<<"的邮箱,输入Y确认,输入其他键返回上级菜单"<<endl;
+        cout<<"您将修改管理员"<<admin[i].name<<"的邮箱,输入Y确认,输入其他键返回上级菜单 "<<endl;
         cout<<"请输入要修改的新邮箱，并在原邮箱中确认更改"<<endl;
         char email[20];
         cin>>email;
@@ -289,7 +301,7 @@ void check_admin_byname(int x)
     }
     else
     {
-        cout<<"输入C修改管理员信息,R返回上级菜单"<<endl;
+        cout<<"输入C修改管理员信息,R返回上级菜单 "<<endl;
         char choice;
         cin>>choice;
         if(choice == 'C')
@@ -319,7 +331,7 @@ void admin_delete(int x)
     }
     if(i == admin.size())
     {
-        cout<<"输入错误，未找到该管理员，输入Y继续操作，输入R返回上级菜单"<<endl;
+        cout<<"输入错误，未找到该管理员，输入Y继续操作，输入R返回上级菜单 "<<endl;
         char choice;
         cin>>choice;
         if(choice=='Y')

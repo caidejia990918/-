@@ -21,11 +21,11 @@ int cur_id;
 void admin_windows()
 {
     cout<<"***************欢迎进入管理员登陆界面*******************"<<endl;
-    cout<<"***********                             ************"<<endl;
-    cout<<"***********          输入Y登陆           ************"<<endl;
-    cout<<"***********          输入R返回           ************"<<endl;
-    cout<<"***********                            ************"<<endl;
-    cout<<"***************************************************"<<endl;
+    cout<<endl;
+    cout<<"                   输入Y登陆             "<<endl;
+    cout<<"                   输入R返回             "<<endl;
+    cout<<endl;
+    cout<<"****************************************************"<<endl;
     cout<<"请输入：";
     char choice;
     cin>>choice;
@@ -40,20 +40,26 @@ void admin_windows()
 
 void admin_loggin_windows(int i)
 {
+    if(i==-1)
+         cout<<"欢迎您,超级管理员"<<endl;
+    else
     cout<<"欢迎您,管理员"<<admin[i].name<<endl;
     cout<<"*******************************************************"<<endl;
-    cout<<"******               输入A以进行书库维护            ******"<<endl;
-    cout<<"******               输入B以进行读者维护            ******"<<endl;
-    cout<<"******                  输入0退出                 ******"<<endl;
+    cout<<endl;
+    cout<<"                    输入A以进行书库维护           "<<endl;
+    cout<<"                    输入B以进行读者维护           "<<endl;
+    cout<<"                       输入0退出                 "<<endl;
+    cout<<endl;
     cout<<"*******************************************************"<<endl;
     cout<<"请输入：";
     char choice ;
     cin>>choice;
-    getchar();
     if(choice == 'A')
         check_book_windows();
-    if(choice == 'B')
+    else if(choice == 'B')
         reader_window();
+    else
+        return;
 }
 
 
