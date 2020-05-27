@@ -32,7 +32,6 @@ void admin_windows()
     if(choice == 'Y')
     {
         admin_log();
-        getchar();
     }
     else
         return;

@@ -30,6 +30,7 @@ void windows()
         cout<<endl;
         cout<<"                   输入Y进行管理员登陆                  "<<endl;
         cout<<"                  输入S进行超级管理员登陆               "<<endl;
+        cout<<"                    输入R进行读者访问               "<<endl;
         cout<<"                     输入0退出系统                     "<<endl;
         cout<<endl;
         cout<<endl;
@@ -41,6 +42,8 @@ void windows()
             admin_windows();
         else if(choice == 'S')
             super_admin_windows();
+        else if(choice == 'R')
+                   reader_self_log_Windows();
     }
     
 }

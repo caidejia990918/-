@@ -15,6 +15,7 @@
 void check_book_windows();
 void search_book_windows();
 void admin_loggin_windows(int i);
+void reader_self_log_Windows();
 int get_curadmin_id();
 struct book
 {
@@ -286,7 +287,7 @@ void delete_book()
     }
 }
 
-void checkoutAllBooks()
+void checkoutAllBooks(int status)
 {
     for(int i =0;i<books.size();i++)
        {
@@ -301,7 +302,10 @@ void checkoutAllBooks()
     char choice;
     cout<<"输入任意见返回上级菜单:";
     cin>>choice;
+    if(status==1)
     check_book_windows();
+    else
+        reader_self_log_Windows();
 }
 void check_book_windows()
 {
@@ -324,7 +328,7 @@ void check_book_windows()
     else if(choice == 'C')
         delete_book();
     else if(choice == 'D')
-        checkoutAllBooks();
+        checkoutAllBooks(1);
     else
         admin_loggin_windows(get_curadmin_id());
     
