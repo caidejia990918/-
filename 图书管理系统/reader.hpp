@@ -151,37 +151,37 @@ void delete_reader()
 void borrow_book_success(int x ,int m,int status)//x为reader 序号 ，m为图书序号
 {
     cout<<"请输入借书密码"<<endl;
-       char password[20];
-       cin>>password;
+    char password[20];
+    cin>>password;
     if(strcmp(password, readers[x].password)==0)
-       {
-           books[m].status=1;
-             borrow_book bob;
-             strcpy(bob.theAccount_reader, readers[x].account);
-             bob.theID_book=books[m].id;
-             cout<<"请输入借书日期"<<endl;
-             cin>>bob.borrow_time;
-             cout<<"请输入还书日期"<<endl;
-             cin>>bob.the_day_need_return;
-             readers[x].personal_lib.push_back(bob);
-             insert_borrowBook(bob);
-             alter_database_book();
-       }
-  else
-  {
-      cout<<"密码输入错误，重新输入按Y，退出按R"<<endl;
-      char choice;
-      cin>>choice;
-      if(choice=='Y')
-          borrow_book_success(x,m,status);
-      else
+    {
+        books[m].status=1;
+        borrow_book bob;
+        strcpy(bob.theAccount_reader, readers[x].account);
+        bob.theID_book=books[m].id;
+        cout<<"请输入借书日期"<<endl;
+        cin>>bob.borrow_time;
+        cout<<"请输入还书日期"<<endl;
+        cin>>bob.the_day_need_return;
+        readers[x].personal_lib.push_back(bob);
+        insert_borrowBook(bob);
+        alter_database_book();
+    }
+    else
+    {
+        cout<<"密码输入错误，重新输入按Y，退出按R"<<endl;
+        char choice;
+        cin>>choice;
+        if(choice=='Y')
+            borrow_book_success(x,m,status);
+        else
         {
             if(status==1)
-                                   reader_window();
-                                   else
-                                       reader_self_log_Windows();
+                reader_window();
+            else
+                reader_self_log_Windows();
         }
-  }
+    }
 }
 
 void search_book_byname_reader(char * name,char * writer,int x,int status)
@@ -237,15 +237,31 @@ void search_book_byname_reader(char * name,char * writer,int x,int status)
                     char choice ;
                     cin>>choice;
                     if(choice == 'Y')
+                    {
+                        if(readers[x].personal_lib.size()>=3)
+                               {
+                                   cout<<"抱歉，一名读者最多一次性借三本书，请归还后再进行借书!"<<endl;
+                                   cout<<"输入任意键返回: ";
+                                   char c;
+                                   cin>>c;
+                                   if(status==1)
+                                   {
+                                       reader_window();
+                                   }
+                                   else
+                                       reader_self_log_Windows();
+                               }
+                        else
                         borrow_book_windows(x,status);
+                    }
                     else
                     {
                         if(status==1)
-                        reader_window();
+                            reader_window();
                         else
                             reader_self_log_Windows();
                     }
-                       
+                    
                 }
                 
             }
@@ -253,31 +269,31 @@ void search_book_byname_reader(char * name,char * writer,int x,int status)
             {
                 cout<<"输入错误"<<endl;
                 if(status==1)
-                                       reader_window();
-                                       else
-                                           reader_self_log_Windows();
-              
+                    reader_window();
+                else
+                    reader_self_log_Windows();
+                
             }
         }
         else
-           {
-               if(status==1)
-                                      reader_window();
-                                      else
-                                          reader_self_log_Windows();
-           }
+        {
+            if(status==1)
+                reader_window();
+            else
+                reader_self_log_Windows();
+        }
     }
 }
 
 void borrow_book_windows(int x,int status)
 {
-        cout<<"请输入要借阅图书的名称：";
-        char name[20];
-        cin>>name;
-        cout<<"请输入要借阅图书作者的姓名：";
-        char writer[20];
-        cin>>writer;
-        search_book_byname_reader(name, writer, x,status);
+    cout<<"请输入要借阅图书的名称：";
+    char name[20];
+    cin>>name;
+    cout<<"请输入要借阅图书作者的姓名：";
+    char writer[20];
+    cin>>writer;
+    search_book_byname_reader(name, writer, x,status);
 }
 
 
@@ -313,27 +329,42 @@ void check_readerInfo(int status)
         else
         {
             if(status==1)
-            reader_window();
+                reader_window();
             else
                 reader_self_log_Windows();
         }
     }
     else
     {
-        cout<<"输入Y进行借书,输入R返回上级菜单"<<endl;
-        char choice;
-        cin>>choice;
-        if(choice == 'Y')
+        if(readers[i].personal_lib.size()>=3)
         {
-            borrow_book_windows(i,status);
+            cout<<"抱歉，一名读者最多一次性借三本书，请归还后再进行借书!"<<endl;
+            cout<<"输入任意键返回: ";
+            char c;
+            cin>>c;
+            if(status==1)
+                reader_window();
+            else
+                reader_self_log_Windows();
         }
         else
         {
-            if(status==1)
-                       reader_window();
-                       else
-                           reader_self_log_Windows();
-            }
+            cout<<"输入Y进行借书,输入R返回上级菜单"<<endl;
+                  char choice;
+                  cin>>choice;
+                  if(choice == 'Y')
+                  {
+                      borrow_book_windows(i,status);
+                  }
+                  else
+                  {
+                      if(status==1)
+                          reader_window();
+                      else
+                          reader_self_log_Windows();
+                  }
+        }
+      
         
     }
 }
@@ -483,12 +514,12 @@ void checkup_reader_borrow()
         }
         else
         {
-           
+            
             for(int j =0;j<readers[i].personal_lib.size();j++)
             {
                 int book_id = readers[i].personal_lib[j].theID_book;
                 if(j==0)
-                cout<<"借阅图书编号"<<"    "<<"借阅图书名"<<"    "<<"图书作者"<<" "<<"借阅还书日期"<<" "<<"规定还书日期"<<endl;
+                    cout<<"借阅图书编号"<<"    "<<"借阅图书名"<<"    "<<"图书作者"<<" "<<"借阅还书日期"<<" "<<"规定还书日期"<<endl;
                 cout<<"    "<<book_id<<"   "<<books[get_book_id(book_id)].name<<" "<<books[get_book_id(book_id)].writer<<" "<<
                 readers[i].personal_lib[j].borrow_time<<" "<<readers[i].personal_lib[j].the_day_need_return<<endl;
             }
@@ -497,11 +528,65 @@ void checkup_reader_borrow()
             cin>>choice ;
             if(choice == 'Y')
             {
-               return_book(i);
+                return_book(i);
             }
             else
                 reader_window();
-                
+            
+        }
+        
+    }
+}
+void checkup_reader_borrow_r()
+{
+    cout<<"请输入读者账号"<<endl;
+    char account[20];
+    cin>>account;
+    int i;
+    for(i =0;i<readers.size();i++)
+    {
+        if(strcmp(readers[i].account, account)==0)
+        {
+            cout<<"读者姓名:"<<readers[i].name<<" 读者账号:"<<readers[i].account<<endl;
+            break;
+        }
+        
+    }
+    if(i == readers.size())
+    {
+        cout<<"输入错误，未找到该读者，输入Y继续操作，输入R返回上级菜单 "<<endl;
+        char choice;
+        cin>>choice;
+        if(choice=='Y')
+            checkup_reader_borrow_r();
+        else
+            reader_self_log_Windows();
+    }
+    else
+    {
+        if(readers[i].personal_lib.empty())
+        {
+            cout<<"读者"<<readers[i].name<<"未借任何图书"<<endl;
+            char choice;
+            cout<<"输入任意键返回 ";
+            cin>>choice;
+            reader_self_log_Windows();
+        }
+        else
+        {
+            
+            for(int j =0;j<readers[i].personal_lib.size();j++)
+            {
+                int book_id = readers[i].personal_lib[j].theID_book;
+                if(j==0)
+                    cout<<"借阅图书编号"<<"    "<<"借阅图书名"<<"    "<<"图书作者"<<" "<<"借阅还书日期"<<" "<<"规定还书日期"<<endl;
+                cout<<"    "<<book_id<<"   "<<books[get_book_id(book_id)].name<<" "<<books[get_book_id(book_id)].writer<<" "<<
+                readers[i].personal_lib[j].borrow_time<<" "<<readers[i].personal_lib[j].the_day_need_return<<endl;
+            }
+            cout<<"若需还书，请到管理员处，输入任意见继续 "<<endl;
+            char c;
+            cin>>c;
+            reader_self_log_Windows();
         }
         
     }
@@ -551,19 +636,24 @@ void reader_self_log_Windows()
     cout<<endl;
     cout<<"                  输入A查看馆藏图书"<<endl;
     cout<<"                    输入B进行借书"<<endl;
+    cout<<"                  输入C查看以借图书"<<endl;
     cout<<"                      输入R返回"<<endl;
     cout<<endl;
     cout<<"*****************************************************"<<endl;
-       cout<<"请输入：";
-       char choice ;
-       cin>>choice;
-       if(choice=='A')
-       {
-         checkoutAllBooks(0);
-       }
-       else if (choice=='B')
-       {
-           check_readerInfo(0);
-       }
-
+    cout<<"请输入：";
+    char choice ;
+    cin>>choice;
+    if(choice=='A')
+    {
+        checkoutAllBooks(0);
+    }
+    else if (choice=='B')
+    {
+        check_readerInfo(0);
+    }
+    else if (choice=='C')
+    {
+        checkup_reader_borrow_r();
+    }
+    
 }
