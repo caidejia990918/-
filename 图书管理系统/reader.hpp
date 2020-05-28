@@ -16,7 +16,7 @@
 void reader_window();
 void borrow_book_windows(int x,int status);
 void reader_self_log_Windows();
-
+void get_curr_time();
 
 struct reader
 {
@@ -25,6 +25,7 @@ struct reader
     char sex[2];
     char password[30];
     char login_date [20];
+    char phoneNumber [20];
     vector<borrow_book>personal_lib;
 };
 
@@ -80,6 +81,8 @@ void reader_regis()
     cin>>r.sex;
     cout<<"请输入读者注册时间"<<endl;
     cin>>r.login_date;
+    cout<<"请输入电话号码"<<endl;
+    cin>>r.phoneNumber;
     cout<<"读者 "<<r.name<<" 注册成功"<<endl;
     OpenFile<<r.name<<" "<<r.account<<" "<<r.password<<" "<<r.sex<<" "<<r.login_date<<endl;
     OpenFile.close();
@@ -104,7 +107,7 @@ void alter_database_reader()
     OpenFile.close();
     OpenFile.open("reader.txt",ios::app);
     for(reader r : readers)
-        OpenFile<<r.name<<" "<<r.account<<" "<<r.password<<" "<<r.sex<<" "<<r.login_date<<endl;
+        OpenFile<<r.name<<" "<<r.account<<" "<<r.password<<" "<<r.sex<<" "<<r.login_date<<r.phoneNumber<<endl;
     OpenFile.close();
 }
 void delete_reader()
@@ -241,7 +244,7 @@ void search_book_byname_reader(char * name,char * writer,int x,int status)
                         if(readers[x].personal_lib.size()>=3)
                                {
                                    cout<<"抱歉，一名读者最多一次性借三本书，请归还后再进行借书!"<<endl;
-                                   cout<<"输入任意键返回: ";
+                                   cout<<"输入任意键返回 ";
                                    char c;
                                    cin>>c;
                                    if(status==1)
@@ -309,7 +312,7 @@ void check_readerInfo(int status)
         if(strcmp(readers[i].account, account)==0)
         {
             cout<<"姓名:"<<readers[i].name<<" 读者账号:"<<readers[i].account<<" 性别:"<<readers[i].sex<<
-            " 注册时间"<<readers[i].login_date<<" 是否借书:";
+            " 注册时间:"<<readers[i].login_date<<" 读者电话号码:"<<readers[i].phoneNumber<<" 是否借书:";
             if(readers[i].personal_lib.empty())
                 cout<<"否"<<endl;
             else
@@ -339,7 +342,7 @@ void check_readerInfo(int status)
         if(readers[i].personal_lib.size()>=3)
         {
             cout<<"抱歉，一名读者最多一次性借三本书，请归还后再进行借书!"<<endl;
-            cout<<"输入任意键返回: ";
+            cout<<"输入任意键返回 ";
             char c;
             cin>>c;
             if(status==1)
@@ -443,6 +446,24 @@ void return_book(int x)
     int temp=get_per_lib_pos(x, book_id);
     if(temp!=-1)
     {
+        int j = search_borrow_book_id(book_id);
+        cout<<"编号为"<<borr_books[j].theID_book<<"的图书最晚还书时间为"<<borr_books[j].the_day_need_return<<endl;
+        get_curr_time();
+        cout<<"读者是否超期，输入Y是，N不是 ";
+        char chaoqi;
+        cin>>chaoqi;
+        if(chaoqi=='Y')
+        {
+            cout<<"请输入超期天数 ";
+            int day;
+            cin>>day;
+            double money=0;
+            money=day*0.5;
+            cout<<"读者请交费"<<money<<"元"<<endl;
+            cout<<"按Y缴费成功"<<endl;
+            char success;
+            cin>>success;
+        }
         int m = get_book_id(book_id);
         books[m].status = 0 ;
         alter_database_book();
@@ -583,7 +604,7 @@ void checkup_reader_borrow_r()
                 cout<<"    "<<book_id<<"   "<<books[get_book_id(book_id)].name<<" "<<books[get_book_id(book_id)].writer<<" "<<
                 readers[i].personal_lib[j].borrow_time<<" "<<readers[i].personal_lib[j].the_day_need_return<<endl;
             }
-            cout<<"若需还书，请到管理员处，输入任意见继续 "<<endl;
+            cout<<"若需还书，请到管理员处，输入任意键继续 "<<endl;
             char c;
             cin>>c;
             reader_self_log_Windows();
@@ -599,7 +620,7 @@ void reader_window()
     cout<<"                  输入A以录入新的读者                 "<<endl;
     cout<<"                  输入B以删除读者信息                 "<<endl;
     cout<<"                  输入C以修改读者密码                 "<<endl;
-    cout<<"                  输入D进入读者借书系统                 "<<endl;
+    cout<<"            输入D查看读者信息，并进入读者借书系统                 "<<endl;
     cout<<"              输入E查看读者所借书目信息(还书)           "<<endl;
     cout<<"                    输入R返回上级菜单                  "<<endl;
     cout<<endl;
@@ -634,10 +655,10 @@ void reader_self_log_Windows()
 {
     cout<<"******************欢迎进入读者登陆界面********************"<<endl;
     cout<<endl;
-    cout<<"                  输入A查看馆藏图书"<<endl;
+    cout<<"                   输入A查看馆藏图书"<<endl;
     cout<<"                    输入B进行借书"<<endl;
-    cout<<"                  输入C查看以借图书"<<endl;
-    cout<<"                      输入R返回"<<endl;
+    cout<<"                   输入C查询已借图书"<<endl;
+    cout<<"                     输入R返回"<<endl;
     cout<<endl;
     cout<<"*****************************************************"<<endl;
     cout<<"请输入：";

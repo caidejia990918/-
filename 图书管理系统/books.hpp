@@ -17,6 +17,9 @@ void search_book_windows();
 void admin_loggin_windows(int i);
 void reader_self_log_Windows();
 int get_curadmin_id();
+
+void admin_loggin_windows(int i);
+
 struct book
 {
     int id;
@@ -311,11 +314,11 @@ void check_book_windows()
 {
     cout<<"****************欢迎进入图书管理界面*******************"<<endl;
     cout<<endl;
-    cout<<"                输入A进行图书查询             "<<endl;
-    cout<<"                输入B进行图书添加              "<<endl;
-    cout<<"                输入C进行图书注销              "<<endl;
+    cout<<"                 输入A进行图书查询             "<<endl;
+    cout<<"                 输入B进行图书添加              "<<endl;
+    cout<<"                 输入C进行图书注销              "<<endl;
     cout<<"               输入D查看所有馆藏图书             "<<endl;
-    cout<<"                   输入R返回                 "<<endl;
+    cout<<"                    输入R返回                 "<<endl;
     cout<<endl;
     cout<<"***************************************************"<<endl;
     cout<<"请输入 ";

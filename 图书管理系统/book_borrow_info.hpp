@@ -12,6 +12,8 @@
 #include <stdio.h>
 
 #endif /* book_borrow_info_hpp */
+
+
 struct borrow_book
 {
     char theAccount_reader [20];
@@ -59,4 +61,14 @@ void remove_borrowbook(int id)
     }
 }
 
-
+int  search_borrow_book_id(int id)
+{
+    for(int i =0;i<borr_books.size();i++)
+    {
+        if(borr_books[i].theID_book==id)
+        {
+            return i;
+        }
+    }
+    return -1;
+}

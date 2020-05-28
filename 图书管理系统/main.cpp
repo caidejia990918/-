@@ -6,9 +6,9 @@
 //  Copyright © 2020 cdj990918. All rights reserved.
 //
 
-
 #include <iostream>
 #include<fstream>
+#include<time.h>
 #include<vector>
 #include"super_admin.hpp"
 #include"books.hpp"
@@ -76,7 +76,7 @@ void init_database()
     ifstream readerfile("reader.txt");
     while (getline(readerfile,s)) {
         reader r;
-        sscanf(&s[0],"%s%s%s%s%s",r.name,r.account,r.password,r.sex,r.login_date);
+        sscanf(&s[0],"%s%s%s%s%s%s",r.name,r.account,r.password,r.sex,r.login_date,r.phoneNumber);
         readers.push_back(r);
     }
     readerfile.close();
@@ -91,11 +91,23 @@ void init_database()
 }
 
 
+void get_curr_time()
+{
+    char str[80];
+    struct tm * cur_time;
+    time_t it ;
+    it = time(NULL);
+    cur_time = localtime(&it);
+    cout<<"当前时间为:";
+    strftime(str, 100, "%F %T\n", cur_time);
+    cout<<str;
+}
+
 
 int main(int argc, const char * argv[]) {
     init_database();
     init_super_admin();
     windows();
-    
-    
+
+    get_curr_time();
 }
