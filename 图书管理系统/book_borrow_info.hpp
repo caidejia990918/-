@@ -11,7 +11,9 @@
 
 #include <stdio.h>
 
+
 #endif /* book_borrow_info_hpp */
+
 
 
 struct borrow_book
@@ -31,6 +33,7 @@ void insert_borrowBook(borrow_book b)
     file.open("BorrowBook.txt",ios::app);
     file<<b.theAccount_reader<<" "<<b.theID_book<<" "<<b.borrow_time<<" "<<b.the_day_need_return<<endl;
     file.close();
+   
 }
 void alter_borrorBook_database()
 {

@@ -162,10 +162,28 @@ void borrow_book_success(int x ,int m,int status)//x为reader 序号 ，m为图�
         borrow_book bob;
         strcpy(bob.theAccount_reader, readers[x].account);
         bob.theID_book=books[m].id;
-        cout<<"请输入借书日期"<<endl;
-        cin>>bob.borrow_time;
-        cout<<"请输入还书日期"<<endl;
-        cin>>bob.the_day_need_return;
+        char str[80];
+        char str_return[80];
+        struct tm * cur_time,*temp;
+        time_t it ;
+        it = time(NULL);
+        cur_time = localtime(&it);
+        strftime(str, 100, "%F %T", cur_time);
+        cout<<"借书时间为："<<str<<endl;
+        strcpy(bob.borrow_time, str);
+        temp=cur_time;
+        if(temp->tm_mon+3<=12)
+        {
+            temp->tm_mon += 3;
+        }
+        else
+        {
+            temp->tm_mon = temp->tm_mon%12;
+            temp->tm_year+=1;
+        }
+        strftime(str_return, 80, "%F", temp);
+        cout<<"规定还书日期为："<<str_return<<endl;
+        strcpy(bob.the_day_need_return, str_return);
         readers[x].personal_lib.push_back(bob);
         insert_borrowBook(bob);
         alter_database_book();
@@ -235,7 +253,7 @@ void search_book_byname_reader(char * name,char * writer,int x,int status)
                 else
                 {
                     borrow_book_success(x, m,status);
-                    cout<<"恭喜，借书成功!!"<<endl;
+                    cout<<"借书成功!!"<<endl;
                     cout<<"输入Y继续借书，输入R返回上层菜单: ";
                     char choice ;
                     cin>>choice;

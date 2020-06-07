@@ -108,6 +108,5 @@ int main(int argc, const char * argv[]) {
     init_database();
     init_super_admin();
     windows();
-
-    get_curr_time();
+  
 }
