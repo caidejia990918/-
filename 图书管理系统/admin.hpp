@@ -88,12 +88,10 @@ void admin_log()
         cout<<"请输入管理员密码"<<endl;
         char password [20];
         cin>>password;
-        getchar();
         while (strcmp(admin[i].password, password)!=0) {
             cout<<"输入密码错误，请重新输入！(输入R退出)"<<endl;
             memset(password, 0, sizeof(password));
             cin>>password;
-            getchar();
             if(password[0]=='R')
                 admin_windows();
         }

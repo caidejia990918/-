@@ -178,7 +178,7 @@ void borrow_book_success(int x ,int m,int status)//x为reader 序号 ，m为图�
         }
         else
         {
-            temp->tm_mon = temp->tm_mon%12;
+            temp->tm_mon =(temp->tm_mon+3)%12;
             temp->tm_year+=1;
         }
         strftime(str_return, 80, "%F", temp);
